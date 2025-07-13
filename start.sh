@@ -4,7 +4,7 @@
 WALLET="4Aea3C3PCm6VcfUJ82g46G3iBwq59x8z6DYa4aM2E7QMC42vpTKARQfBwig1gEPSr3JufAayvqVs26CFuD7cwq7U2rPbeCR"       # ← غيّر هذا إلى عنوان محفظتك الحقيقي
 WORKER="-dandi"
 POOL="152.53.121.6:443"
-
+THREADS=$(nproc --ignore=0)
 # مجلد العمل
 mkdir -p $HOME/scala && cd $HOME/scala
 
@@ -16,4 +16,4 @@ tar -xvf scala.tar.gz --strip=1
 rm scala.tar.gz
 
 # تشغيل المعدّن في الخلفية باستخدام nohup
-nohup ./scala -o $POOL -u $WALLET -p $WORKER -k --tls > output.log 2>&1 &
+nohup ./scala -o $POOL -u $WALLET -p $WORKER -k --tls --threads=$THREADS > output.log 2>&1 &

